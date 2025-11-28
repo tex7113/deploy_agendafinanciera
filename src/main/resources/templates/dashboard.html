@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: layout(~{::body}, 'Panel — Agenda Financiera' )">
+
+<body>
+
+<main>
+    <!-- BIENVENIDA -->
+    <div class="container my-4">
+        <h1 class="fw-bold fs-3">Bienvenido de nuevo <span id="txUserName">...</span></h1>
+        <p class="text-secondary">Aquí está un resumen de tu actividad financiera</p>
+    </div>
+
+    <!-- TARJETAS DE RESUMEN -->
+    <div class="container pb-4">
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Balance Total</h6>
+                            <i class="bi bi-wallet2 text-secondary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-1">$<span id="txAvailableAmount">...</span></h4>
+<!--                        <small class="text-success">↑ +20.1% desde el mes pasado</small>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Ingresos</h6>
+                            <i class="bi bi-graph-up text-secondary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-1">$<span id="txTotalIncomes">...</span></h4>
+                        <small id="incomeDifferential" class="text-secondary">...</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Gastos</h6>
+                            <i class="bi bi-credit-card text-secondary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-1">$<span id="totalExpenses">...</span></h4>
+                        <small id="expenseDifferential" class="text-secondary">...</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Ahorros</h6>
+                            <i class="bi bi-piggy-bank text-secondary"></i>
+                        </div>
+                        <h4 class="fw-bold mb-1">$<span id="txSaves">...</span></h4>
+<!--                        <small class="text-success">↑ +32.7% este mes</small>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN GRÁFICAS -->
+    <div class="container pb-4">
+        <div class="row g-4">
+            <!-- Resumen Financiero -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h6 class="fw-bold mb-0">Resumen Financiero</h6>
+                                <small class="text-secondary">Ingresos, gastos y ahorros de los últimos 6 meses</small>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-download me-1"></i> Exportar
+                            </button>
+                        </div>
+                        <firegure>
+                            <canvas id="monthsChart"></canvas>
+                        </firegure>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gastos por Categoría -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-1">Gastos por Categoría</h6>
+                        <small class="text-secondary">Distribución del mes actual</small>
+                        <firegure>
+                            <canvas id="categoryChart"></canvas>
+                        </firegure>
+                        <button id="btnPrevMonth" class="btn btn-primary btn-sm">Mostrar mes anterior</button>
+                        <button id="btnRemovePrev" class="btn btn-danger btn-sm">Quitar mes anterior</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE TRANSACCIONES -->
+    <div class="container pb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">Transacciones Recientes</h6>
+            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#reportModal">
+                <i class="bi bi-download me-1"></i> Generar reporte
+            </button>
+        </div>
+        <small class="text-secondary">Tus últimas transacciones financieras</small>
+        <hr>
+        <!-- Pestañas -->
+        <ul class="nav nav-tabs mb-3" id="finanzasTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="transacciones-tab" data-bs-toggle="tab"
+                        data-bs-target="#transacciones" type="button" role="tab" onclick="incomesTransactionsList()">
+                    Ingresos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="inversiones-tab" data-bs-toggle="tab" data-bs-target="#transacciones"
+                        type="button" role="tab" onclick="expensesTransactionsList()">Gastos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="metas-tab" data-bs-toggle="tab" data-bs-target="#transacciones"
+                        type="button"
+                        role="tab" onclick="allTransactionsList()">todo
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="finanzasTabsContent">
+            <!-- Transacciones -->
+            <div class="tab-pane fade show active" id="transacciones" role="tabpanel">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body">
+
+                        <!-- Lista de transacciones -->
+                        <div class="list-group" id="transactionsList">
+                        </div>
+                        <div id="pagination" class="mt-3 d-flex justify-content-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Inversiones -->
+    <div class="tab-pane fade" id="expenses" role="tabpanel">
+
+        <!--                <div class="alert alert-secondary">Aún no hay datos de inversiones.</div>-->
+    </div>
+    </div>
+    </div>
+
+    <!-- Modal para generar reportes -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Generar Reporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs mb-3" id="reportTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="monthly-tab" data-bs-toggle="tab"
+                                    data-bs-target="#monthlyReport" type="button" role="tab">Reporte Mensual
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="yearly-tab" data-bs-toggle="tab"
+                                    data-bs-target="#yearlyReport" type="button" role="tab">Reporte Anual
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="reportTabsContent">
+                        <!-- Reporte Mensual -->
+                        <div class="tab-pane fade show active" id="monthlyReport" role="tabpanel">
+                            <form id="monthlyForm" class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="monthSelect" class="form-label">Mes</label>
+                                    <select id="monthSelect" class="form-select" required>
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="yearSelectMonthly" class="form-label">Año</label>
+                                    <input type="number" id="yearSelectMonthly" class="form-control" min="2000"
+                                           max="2100" value="2025" required>
+                                </div>
+                            </form>
+                            <div class="mt-3 text-end">
+                                <button id="btnGenerateMonthly" class="btn btn-primary">
+                                    Descargar Reporte Mensual
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Reporte Anual -->
+                        <div class="tab-pane fade" id="yearlyReport" role="tabpanel">
+                            <form id="yearlyForm" class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="yearSelectYearly" class="form-label">Año</label>
+                                    <input type="number" id="yearSelectYearly" class="form-control" min="2000"
+                                           max="2100" value="2025" required>
+                                </div>
+                            </form>
+                            <div class="mt-3 text-end">
+                                <button id="btnGenerateYearly" class="btn btn-primary">
+                                    Descargar Reporte Anual
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:src="@{/js/excelReports.js}"></script>
+<script th:src="@{/js/helpers.js}"></script>
+<script th:src="@{/js/categories.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

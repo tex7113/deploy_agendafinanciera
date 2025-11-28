@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: layout(~{::body}, 'servicios')">
+
+<body>
+
+<main>
+    <div class="text-center my-5">
+        <a href="#"
+           class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill text-success fw-semibold text-decoration-none fs-7 bg-success bg-opacity-10">
+            <span class="bg-success rounded-circle d-inline-block" style="width:8px; height:8px;"></span>
+            Servicios Completos
+        </a>
+    </div>
+
+    <!-- Texto central -->
+    <div class="text-center my-2">
+        <h1 class="text-dark display-4 fw-bold">Todo lo que Necesitas para</h1>
+        <h2 class="text-success display-4 fw-bold">Dominar tus Finanzas</h2>
+        <p class="fs-5 text-secondary">
+            Descubre nuestra suite completa de herramientas financieras diseñadas para ayudarte a tomar el control <br>
+            total de tu dinero, desde la gestión diaria hasta la planificación a largo plazo.
+        </p>
+        <div class="my-5">
+            <a href="https://github.com/tu-usuario/tu-repositorio"
+               target="_blank"
+               class="btn btn-secondary fw-bold rounded-pill px-4 py-2">
+                Descargar Aplicación
+            </a>
+        </div>
+    </div>
+
+    <!-- Primer Apartado de Tarjetas -->
+    <div class="container mb-5">
+        <div class="row g-4">
+
+            <!-- Tarjeta 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-wallet2 fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Gestión de Cuentas</h5>
+                        <p class="card-text">Administra todas tus cuentas bancarias y tarjetas desde un solo lugar.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Sincronización automática con bancos</li>
+                            <li>✓ Vista consolidada de saldos</li>
+                            <li>✓ Historial completo de transacciones</li>
+                            <li>✓ Categorización inteligente de gastos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-graph-up-arrow fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Análisis de Inversiones</h5>
+                        <p class="card-text">Monitorea y optimiza tu portafolio de inversiones con herramientas
+                            profesionales.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Seguimiento de acciones y fondos</li>
+                            <li>✓ Análisis de rendimiento en tiempo real</li>
+                            <li>✓ Alertas de mercado personalizadas</li>
+                            <li>✓ Recomendaciones basadas en IA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-bullseye fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Metas Financieras</h5>
+                        <p class="card-text">Define y alcanza tus objetivos financieros con planes personalizados.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Creación de metas a corto y largo plazo</li>
+                            <li>✓ Seguimiento automático de progreso</li>
+                            <li>✓ Sugerencias de ahorro inteligentes</li>
+                            <li>✓ Proyecciones de cumplimiento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Segundo Apartado de Tarjetas -->
+    <div class="container mb-5">
+        <div class="row g-4">
+
+            <!-- Tarjeta 4 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-credit-card fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Control de Deudas</h5>
+                        <p class="card-text">Gestiona y reduce tus deudas con estrategias efectivas.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Registro de todas tus deudas</li>
+                            <li>✓ Recordatorios de vencimientos</li>
+                            <li>✓ Notificaciones tempranas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 5 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-phone fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">App Móvil</h5>
+                        <p class="card-text">Accede a tus finanzas desde cualquier lugar con nuestra app.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Sincronización en tiempo real</li>
+                            <li>✓ Notificaciones push</li>
+                            <li>✓ Registro fácil y rápido</li>
+                            <li>✓ Interfaz intuitiva</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 6 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 p-3 bg-success bg-opacity-10 rounded-circle d-inline-block">
+                            <i class="bi bi-lock fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Seguridad Avanzada</h5>
+                        <p class="card-text">Protección de nivel bancario para tus datos financieros.</p>
+                        <ul class="list-unstyled text-muted">
+                            <li>✓ Encriptación de extremo a extremo</li>
+                            <li>✓ Autenticación de dos factores</li>
+                            <li>✓ Respaldo de datos</li>
+                            <li>✓ Protección contra inyección SQL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <h1>¿Listo para Transformar tu Vida Financiera?</h1>
+        <p class="fs-5 text-secondary">Inicia sesión y descubre todas las funciones disponibles. ¿Tienes dudas?
+            ¡Contáctanos!</p>
+        <div class="mt-4">
+            <a class="btn btn-dark fw-bold rounded-pill px-4 py-2" href="../index.php">Comentarios</a>
+            <a class="btn btn-outline-dark fw-bold rounded-pill px-4 py-2 ms-3 " href="contact.php">Comunícate con
+                Nosotros</a>
+        </div>
+    </div>
+
+    <!-- Tarjeta Contenedora -->
+    <div class="container py-5 mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm p-4">
+                    <div class="d-flex justify-content-around text-center">
+                        <div>
+                            <h1 class="text-success fw-bold">50,000+</h1>
+                            <p class="text-secondary mb-0">Usuarios Activos</p>
+                        </div>
+                        <div>
+                            <h1 class="text-success fw-bold">$2M+</h1>
+                            <p class="text-secondary mb-0">Ahorrado por Usuarios</p>
+                        </div>
+                        <div>
+                            <h1 class="text-success fw-bold">4.9/5</h1>
+                            <p class="text-secondary mb-0">Calificación Promedio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

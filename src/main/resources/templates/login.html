@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Iniciar Sesión</title>
+    <!-- Bootstrap -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!--    jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+<body class="bg-light d-flex align-items-center min-vh-100">
+
+<div class="container py-5">
+    <div class="row align-items-center justify-content-center">
+
+        <!-- Columna Izquierda -->
+        <div class="col-md-6 text-center text-md-start mb-5 mb-md-0">
+            <div class="mb-4">
+                <i class="bi bi-graph-up-arrow fs-1 text-success"></i>
+                <h2 class="text-black fw-bold display-5 mt-2">
+                    Sistema de Agenda Financiera
+                </h2>
+                <p class="fs-5 text-secondary">
+                    Accede a tu panel de control personalizado con gráficas en tiempo real, análisis detallados y
+                    herramientas avanzadas para tomar mejores decisiones financieras.
+                </p>
+            </div>
+            <div class="d-flex justify-content-center justify-content-md-start gap-5">
+                <div>
+                    <h1 class="text-success fw-bold">+15K</h1>
+                    <p class="text-secondary mb-0">Usuarios Activos</p>
+                </div>
+                <div>
+                    <h1 class="text-success fw-bold">98%</h1>
+                    <p class="text-secondary mb-0">Satisfechos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha -->
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow-sm p-4">
+                <h4 class="fw-bold mb-3 text-center">Iniciar Sesión</h4>
+                <form id="loginForm" onsubmit="event.preventDefault(); iniciarSesion();">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-success bg-opacity-10 text-success">
+                              <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" id="email" class="form-control" placeholder="usuario@ejemplo.com"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-success bg-opacity-10 text-success">
+                              <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <!-- Contenedor para mensajes -->
+                    <div id="loginMessage" class="mb-3 text-center text-danger"></div>
+                    <button id="loginButton" type="submit" class="btn btn-success w-100">
+                        <span id="loginButtonText">Iniciar Sesión</span>
+                        <span id="loginSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                    </button>
+
+                    <a type="submit" class="btn btn-danger w-100" th:href="@{/}">
+                        <span>Volver al inicio</span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>
