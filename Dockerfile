@@ -6,7 +6,8 @@ RUN mvn -q dependency:go-offline
 
 COPY src src
 
-RUN mvn -q package -DskipTests
+# Forzar UTF-8 para evitar MalformedInputException
+RUN mvn -Dfile.encoding=UTF-8 -q package -DskipTests
 
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
