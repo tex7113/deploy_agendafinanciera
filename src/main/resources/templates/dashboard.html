@@ -35,7 +35,7 @@
                             <i class="bi bi-graph-up text-secondary"></i>
                         </div>
                         <h4 class="fw-bold mb-1">$<span id="txTotalIncomes">...</span></h4>
-                        <small id="incomeDifferential" class="text-secondary">...</small>
+                        <small id="incomeDifferential">...</small>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                             <i class="bi bi-credit-card text-secondary"></i>
                         </div>
                         <h4 class="fw-bold mb-1">$<span id="totalExpenses">...</span></h4>
-                        <small id="expenseDifferential" class="text-secondary">...</small>
+                        <small id="expenseDifferential">...</small>
                     </div>
                 </div>
             </div>
@@ -214,6 +214,15 @@
                                            max="2100" value="2025" required>
                                 </div>
                             </form>
+
+                            <!-- Spinner de carga, inicialmente oculto -->
+                            <div id="loadingSpinner" class="d-none text-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <p>Generando tu reporte, por favor espera...</p>
+                            </div>
+
                             <div class="mt-3 text-end">
                                 <button id="btnGenerateMonthly" class="btn btn-primary">
                                     Descargar Reporte Mensual
@@ -230,6 +239,15 @@
                                            max="2100" value="2025" required>
                                 </div>
                             </form>
+
+                            <!-- Spinner de carga para el reporte anual -->
+                            <div id="loadingSpinnerYearly" class="d-none text-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <p>Generando tu reporte, por favor espera...</p>
+                            </div>
+
                             <div class="mt-3 text-end">
                                 <button id="btnGenerateYearly" class="btn btn-primary">
                                     Descargar Reporte Anual

@@ -55,8 +55,18 @@ async function loadTransactions() {
 
     $("#txTotalIncomes").text(totalIncomes);
     $("#totalExpenses").text(totalExpenses);
-    $("#incomeDifferential").text(incomeDiff + "% vs mes anterior");
-    $("#expenseDifferential").text(expenseDiff + "% vs mes anterior");
+
+    // Actualizamos incomeDifferential
+    $("#incomeDifferential")
+      .text(incomeDiff + "% vs mes anterior")
+      .removeClass("text-danger text-success")
+      .addClass(incomeDiff < 0 ? "text-danger" : "text-success");
+
+    // Actualizamos expenseDifferential
+    $("#expenseDifferential")
+      .text(expenseDiff + "% vs mes anterior")
+      .removeClass("text-danger text-success")
+      .addClass(expenseDiff < 0 ? "text-danger" : "text-success");
 
   } catch (error) {
     console.error("Error al cargar transacciones:", error);

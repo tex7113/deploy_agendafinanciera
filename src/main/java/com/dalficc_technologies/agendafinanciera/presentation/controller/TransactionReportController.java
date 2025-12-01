@@ -52,9 +52,6 @@ public class TransactionReportController {
         }
     }
 
-    // ------------------------------------------------------------
-    // NUEVO ENDPOINT — REPORTE ANUAL
-    // ------------------------------------------------------------
     @GetMapping("/year/report")
     public ResponseEntity<byte[]> generateYearlyReport(
             @RequestHeader("Authorization") String token,

@@ -15,9 +15,6 @@ public class PageController {
     @GetMapping("/public/quienes-somos")
     public String about() { return "about"; }
 
-    @GetMapping("/public/contacto")
-    public String contac() { return "contact"; }
-
     @GetMapping("/public/iniciar-sesion")
     public String login() { return "login"; }
 }
