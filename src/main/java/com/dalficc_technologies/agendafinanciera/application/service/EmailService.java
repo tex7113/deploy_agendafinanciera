@@ -1,32 +1,45 @@
 package com.dalficc_technologies.agendafinanciera.application.service;
 
+
+import com.sendgrid.*;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    @Value("${SENDGRID_API_KEY}")
+    private String sendgridApiKey;
 
-    @Value("${spring.mail.username}")
+    @Value("${MAIL_FROM}")
     private String senderEmail;
 
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    public void sendEmail(String to, String subject, String message) throws Exception {
 
-    public void sendEmail(String to, String subject, String message) {
+        Email from = new Email(senderEmail);
+        Email toEmail = new Email(to);
+        Content content = new Content("text/plain", message);
 
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(to);
-        email.setSubject(subject);
-        email.setText(message);
+        Mail mail = new Mail(from, subject, toEmail, content);
 
-        System.out.println("spring.mail.username = " + senderEmail);
-        email.setFrom(senderEmail); // <-- usando @Value
+        SendGrid sg = new SendGrid(sendgridApiKey);
+        Request request = new Request();
 
-        mailSender.send(email);
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+
+            Response response = sg.api(request);
+
+            System.out.println("SendGrid response code: " + response.getStatusCode());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Error enviando correo: " + ex.getMessage());
+        }
     }
 }

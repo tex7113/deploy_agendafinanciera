@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -56,5 +57,12 @@ public class ContactController {
         }
 
         return "contact";
+    }
+
+    @GetMapping("/test-mail")
+    @ResponseBody
+    public String testEmail() throws Exception {
+        emailService.sendEmail("dalficctechnologies@gmail.com", "Test", "Correo de prueba");
+        return "OK";
     }
 }
